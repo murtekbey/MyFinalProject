@@ -35,7 +35,7 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(
                 CheckIfProductNameExists(product.ProductName),
-                CheckIfProductCountofCategoryCorrect(product.CategoryId),
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                 CheckIfCategoryLimitExceeded()
                 );
 
@@ -90,7 +90,7 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(
                 CheckIfProductNameExists(product.ProductName),
-                CheckIfProductCountofCategoryCorrect(product.CategoryId),
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                 CheckIfCategoryLimitExceeded()
                 );
 
@@ -103,10 +103,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        private IResult CheckIfProductCountofCategoryCorrect(int categoryId)
+        private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
-            // Bir kategoride en fazla 10 ürün olabilir.
-            
             var result = _productDal.GetAll(p => p.CategoryId == categoryId);
             if (result.Count >= 10)
             {
